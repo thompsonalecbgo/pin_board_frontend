@@ -5,9 +5,17 @@ import { getEmptyImage } from "react-dnd-html5-backend";
 import { ItemTypes } from "../lib/item-types";
 import EditableNote from "../components/editable-note";
 
-export default function DraggableNote({ note, toEdit }) {
+function getStyles(left, top) {
+  const transform = `translate3d(${left}px, ${top}px, 0)`;
+  return {
+    position: 'absolute',
+    transform
+  }
+}
+
+export default function DraggableNote({ note }) {
   const [{ isDragging }, drag, preview] = useDrag({
-    item: { type: ItemTypes.NOTE },
+    item: { type: ItemTypes.NOTE, left: note.left, top: note.top },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -18,8 +26,11 @@ export default function DraggableNote({ note, toEdit }) {
 //   })
 
   return (
-    <div ref={drag}>
-      <EditableNote note={note} toEdit={toEdit} />
+    <div 
+    ref={drag}
+    style={getStyles(note.left, note.top)}
+    >
+      <EditableNote note={note} />
     </div>
   );
 }

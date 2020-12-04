@@ -2,10 +2,10 @@ import { useEffect, useState, useCallback } from "react";
 import { editNote } from "../lib/notes";
 import TextareaAutosize from "react-textarea-autosize";
 
-export default function EditableNote({ note, toEdit }) {
+export default function EditableNote({ note }) {
   let inputRef;
   const [text, setText] = useState(note.text);
-  const [isEditing, setEditing] = useState(toEdit);
+  const [isEditing, setEditing] = useState(note.toEdit);
 
   const handleDoubleClick = useCallback((e) => {
     e.stopPropagation();
