@@ -7,33 +7,17 @@ export default function EditableNote({ note, toEdit }) {
   const [text, setText] = useState(note.text);
   const [isEditing, setEditing] = useState(toEdit);
 
-  // const handleDoubleClick = (e) => {
-  //   e.stopPropagation();
-  //   setEditing(true);
-  // };
   const handleDoubleClick = useCallback((e) => {
     e.stopPropagation();
     setEditing(true);
   });
-  // const handleChange = (e) => {
-  //   setText(e.target.value);
-  // };
   const handleChange = useCallback((e) => {
     setText(e.target.value);
   });
-  // const handleBlur = async (e) => {
-  //   await editNote({ text: e.target.value, id: note.id });
-  //   setEditing(false);
-  // };
   const handleBlur = useCallback(async (e) => {
     await editNote({ text: e.target.value, id: note.id });
     setEditing(false);
   });
-  // const handleFocus = (e) => {
-  //   var temp_value = e.target.value;
-  //   e.target.value = "";
-  //   e.target.value = temp_value;
-  // };
   const handleFocus = useCallback((e) => {
     var temp_value = e.target.value;
     e.target.value = "";
