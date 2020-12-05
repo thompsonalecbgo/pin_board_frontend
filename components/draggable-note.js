@@ -13,7 +13,6 @@ function getStyles(left, top, isDragging) {
     WebkitTransform: transform,
     opacity: isDragging ? 0 : 1,
     height: isDragging ? 0 : "",
-    // cursor: isDragging ? "grabbing" : "grab",
   };
 }
 

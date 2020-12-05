@@ -11,7 +11,7 @@ import CrimeBoardDragLayer from "../components/crime-board-drag-layer";
 
 function prepareNotes(notes) {
   const savedNotes = notes.map((note) => {
-    return { ...note, top: 0, left: 0, toEdit: false };
+    return { ...note, toEdit: false };
   });
   return normalizeArray(savedNotes, "id");
 }

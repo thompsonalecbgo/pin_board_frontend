@@ -19,7 +19,7 @@ export default function EditableNote({ note }) {
     setText(e.target.value);
   });
   const handleBlur = useCallback(async (e) => {
-    await editNote({ text: e.target.value, id: note.id });
+    await editNoteText({ text: e.target.value, id: note.id });
     setEditing(false);
     setNotes(
       update(notes, {

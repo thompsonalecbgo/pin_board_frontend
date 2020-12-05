@@ -3,7 +3,7 @@ import { useDrop } from "react-dnd";
 import update from "immutability-helper";
 
 import { ItemTypes } from "../lib/item-types";
-import { addNote } from "../lib/notes";
+import { addNote, editNoteLocation } from "../lib/notes";
 import { useNotes } from "../lib/notes-provider";
 import DraggableNote from "../components/draggable-note";
 
@@ -22,6 +22,7 @@ export default function CrimeBoard() {
         },
       })
     );
+    editNoteLocation({ id, top, left });
   });
 
   const [, drop] = useDrop({
@@ -37,7 +38,6 @@ export default function CrimeBoard() {
 
   const handleDoubleClick = useCallback(
     async (e) => {
-      console.log(e);
       const addedNote = await addNote({ text: "" });
       const addedNoteId = addedNote.id;
       setNotes({
