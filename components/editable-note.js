@@ -19,9 +19,9 @@ export default function EditableNote({ note }) {
     setEditing(false);
   });
   const handleFocus = useCallback((e) => {
-    var temp_value = e.target.value;
-    e.target.value = "";
-    e.target.value = temp_value;
+    // var temp_value = e.target.value;
+    // e.target.value = "";
+    // e.target.value = temp_value;
   });
 
   useEffect(() => {
