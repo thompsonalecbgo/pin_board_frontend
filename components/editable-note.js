@@ -1,11 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
-import { editNote } from "../lib/notes";
 import TextareaAutosize from "react-textarea-autosize";
+import update from "immutability-helper";
+
+import { editNote } from "../lib/notes";
+import { useNotes } from "../lib/notes-provider";
 
 export default function EditableNote({ note }) {
   let inputRef;
   const [text, setText] = useState(note.text);
   const [isEditing, setEditing] = useState(note.toEdit);
+  const [notes, setNotes] = useNotes();
 
   const handleDoubleClick = useCallback((e) => {
     e.stopPropagation();
@@ -17,7 +21,14 @@ export default function EditableNote({ note }) {
   const handleBlur = useCallback(async (e) => {
     await editNote({ text: e.target.value, id: note.id });
     setEditing(false);
-  });
+    setNotes(
+      update(notes, {
+        [note.id]: {
+          $merge: { text: e.target.value, isEdit: false },
+        },
+      })
+    );
+  }, [note]);
   const handleFocus = useCallback((e) => {
     // var temp_value = e.target.value;
     // e.target.value = "";
@@ -45,7 +56,6 @@ export default function EditableNote({ note }) {
       onFocus={handleFocus}
     />
   );
-
   if (!text && !isEditing) {
     return null;
   } else {

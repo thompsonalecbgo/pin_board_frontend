@@ -1,25 +1,18 @@
-import { useState, useCallback } from "react";
-import { useDrop, useDragLayer } from "react-dnd";
+import { useCallback } from "react";
+import { useDrop } from "react-dnd";
 import update from "immutability-helper";
 
 import { ItemTypes } from "../lib/item-types";
 import { addNote } from "../lib/notes";
-import normalizeArray from "../lib/normalize-array";
+import { useNotes } from "../lib/notes-provider";
 import DraggableNote from "../components/draggable-note";
 
 function renderNote(note) {
   return <DraggableNote key={note.id} note={note} />;
 }
 
-export function prepareNotes(notes) {
-  const savedNotes = notes.map((note) => {
-    return { ...note, top: 0, left: 0, toEdit: false };
-  });
-  return normalizeArray(savedNotes, "id");
-}
-
-export default function CrimeBoard(props) {
-  const [notes, setNotes] = useState(prepareNotes(props.notes));
+export default function CrimeBoard() {
+  const [notes, setNotes] = useNotes();
 
   const moveNote = useCallback((id, left, top) => {
     setNotes(
@@ -35,8 +28,8 @@ export default function CrimeBoard(props) {
     accept: ItemTypes.NOTE,
     drop(item, monitor) {
       const delta = monitor.getDifferenceFromInitialOffset();
-      let left = Math.round(item.left + delta.x);
-      let top = Math.round(item.top + delta.y);
+      let left = Math.round(item.note.left + delta.x);
+      let top = Math.round(item.note.top + delta.y);
       moveNote(item.id, left, top);
       return undefined;
     },
@@ -44,7 +37,7 @@ export default function CrimeBoard(props) {
 
   const handleDoubleClick = useCallback(
     async (e) => {
-      console.log(e)
+      console.log(e);
       const addedNote = await addNote({ text: "" });
       const addedNoteId = addedNote.id;
       setNotes({
@@ -52,7 +45,7 @@ export default function CrimeBoard(props) {
         [addedNoteId]: {
           ...addedNote,
           toEdit: true,
-          top: e.pageY - (e.target.offsetTop * 2),
+          top: e.pageY - e.target.offsetTop * 2,
           left: e.pageX,
         },
       });

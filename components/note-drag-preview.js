@@ -1,10 +1,8 @@
-import { useEffect, useState, memo } from "react";
+import { memo } from "react";
 
-import EditableNote from "../components/editable-note";
 import Note from "../components/note";
 
 const styles = {
-  position: "absolute",
   display: "inline-block",
   transform: "rotate(-7deg)",
   WebkitTransform: "rotate(-7deg)",
@@ -12,7 +10,7 @@ const styles = {
 
 export const NoteDragPreview = memo(({ note }) => {
   return (
-    <div>
+    <div style={styles}>
       <Note text={note.text} />
     </div>
   );

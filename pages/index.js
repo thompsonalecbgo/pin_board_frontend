@@ -1,20 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+import normalizeArray from "../lib/normalize-array";
 import { getNotesData } from "../lib/notes";
-import CrimeBoard, {prepareNotes} from "../components/crime-board";
+import { NotesProviderContext } from "../lib/notes-provider";
+import CrimeBoard from "../components/crime-board";
 import CrimeBoardDragLayer from "../components/crime-board-drag-layer";
-import { useNotes } from "../components/notes-provider";
+
+function prepareNotes(notes) {
+  const savedNotes = notes.map((note) => {
+    return { ...note, top: 0, left: 0, toEdit: false };
+  });
+  return normalizeArray(savedNotes, "id");
+}
 
 export default function Home(props) {
-  const [notes, setNotes] = useNotes();
-
-  useEffect(async () => {
-    await setNotes({ ...prepareNotes(props.notes)});
-    console.log(notes)
-  }, [props]);
+  const [notes, setNotes] = useState(prepareNotes(props.notes));
 
   return (
     <>
@@ -23,8 +26,10 @@ export default function Home(props) {
       </Head>
       <div>Create your own crime board for fun!</div>
       <DndProvider backend={HTML5Backend}>
-        <CrimeBoard notes={props.notes} />
-        <CrimeBoardDragLayer />
+        <NotesProviderContext.Provider value={[notes, setNotes]}>
+          <CrimeBoard notes={props.notes} />
+          <CrimeBoardDragLayer />
+        </NotesProviderContext.Provider>
       </DndProvider>
     </>
   );

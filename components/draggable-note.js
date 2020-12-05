@@ -13,6 +13,7 @@ function getStyles(left, top, isDragging) {
     WebkitTransform: transform,
     opacity: isDragging ? 0 : 1,
     height: isDragging ? 0 : "",
+    // cursor: isDragging ? "grabbing" : "grab",
   };
 }
 
@@ -21,8 +22,6 @@ export default function DraggableNote({ note }) {
     item: {
       type: ItemTypes.NOTE,
       id: note.id,
-      left: note.left,
-      top: note.top,
       note: note,
     },
     collect: (monitor) => ({
