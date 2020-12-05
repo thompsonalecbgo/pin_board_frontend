@@ -20,12 +20,12 @@ export default function DraggableNote({ note }) {
   const [{ isDragging }, drag, preview] = useDrag({
     item: {
       type: ItemTypes.NOTE,
-      id: note.id,
       note: note,
     },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
+    canDrag: !note.isEdit
   });
 
   useEffect(() => {

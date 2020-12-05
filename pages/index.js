@@ -27,7 +27,7 @@ export default function Home(props) {
       <div>Create your own crime board for fun!</div>
       <DndProvider backend={HTML5Backend}>
         <NotesProviderContext.Provider value={[notes, setNotes]}>
-          <CrimeBoard notes={props.notes} />
+          <CrimeBoard />
           <CrimeBoardDragLayer />
         </NotesProviderContext.Provider>
       </DndProvider>

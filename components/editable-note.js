@@ -7,32 +7,50 @@ import { useNotes } from "../lib/notes-provider";
 
 export default function EditableNote({ note }) {
   let inputRef;
+  const [notes, setNotes] = useNotes();
   const [text, setText] = useState(note.text);
   const [isEditing, setEditing] = useState(note.toEdit);
-  const [notes, setNotes] = useNotes();
 
-  const handleDoubleClick = useCallback((e) => {
-    e.stopPropagation();
-    setEditing(true);
-  });
+  const handleDoubleClick = useCallback(
+    (e) => {
+      e.stopPropagation();
+      setEditing(true);
+      setNotes(
+        update(notes, {
+          [note.id]: {
+            $merge: { isEdit: true },
+          },
+        })
+      );
+    },
+    [notes, note]
+  );
   const handleChange = useCallback((e) => {
     setText(e.target.value);
   });
-  const handleBlur = useCallback(async (e) => {
-    await editNoteText({ text: e.target.value, id: note.id });
-    setEditing(false);
-    setNotes(
-      update(notes, {
-        [note.id]: {
-          $merge: { text: e.target.value, isEdit: false },
-        },
-      })
-    );
-  }, [note]);
+  const handleBlur = useCallback(
+    (e) => {
+      setEditing(false);
+      setNotes(
+        update(notes, {
+          [note.id]: {
+            $merge: { text: e.target.value, isEdit: false },
+          },
+        })
+      );
+      editNote({
+        id: note.id,
+        top: note.top,
+        left: note.left,
+        text: e.target.value,
+      });
+    },
+    [notes, note]
+  );
   const handleFocus = useCallback((e) => {
-    // var temp_value = e.target.value;
-    // e.target.value = "";
-    // e.target.value = temp_value;
+    var temp_value = e.target.value;
+    e.target.value = "";
+    e.target.value = temp_value;
   });
 
   useEffect(() => {

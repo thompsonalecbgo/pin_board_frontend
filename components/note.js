@@ -1,7 +1,3 @@
 export default function Note({ text }) {
-  return (
-    <div className="note">
-      {text}
-    </div>
-  );
+  return <div className="note">{text}</div>;
 }

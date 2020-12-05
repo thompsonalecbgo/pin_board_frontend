@@ -3,7 +3,7 @@ import { useDrop } from "react-dnd";
 import update from "immutability-helper";
 
 import { ItemTypes } from "../lib/item-types";
-import { addNote, editNoteLocation } from "../lib/notes";
+import { addNote, editNote } from "../lib/notes";
 import { useNotes } from "../lib/notes-provider";
 import DraggableNote from "../components/draggable-note";
 
@@ -14,16 +14,24 @@ function renderNote(note) {
 export default function CrimeBoard() {
   const [notes, setNotes] = useNotes();
 
-  const moveNote = useCallback((id, left, top) => {
-    setNotes(
-      update(notes, {
-        [id]: {
-          $merge: { left, top },
-        },
-      })
-    );
-    editNoteLocation({ id, top, left });
-  });
+  const moveNote = useCallback(
+    (movedNote, left, top) => {
+      setNotes(
+        update(notes, {
+          [movedNote.id]: {
+            $merge: { left, top },
+          },
+        })
+      );
+      editNote({
+        id: movedNote.id,
+        text: movedNote.text,
+        top,
+        left,
+      });
+    },
+    [notes]
+  );
 
   const [, drop] = useDrop({
     accept: ItemTypes.NOTE,
@@ -31,7 +39,7 @@ export default function CrimeBoard() {
       const delta = monitor.getDifferenceFromInitialOffset();
       let left = Math.round(item.note.left + delta.x);
       let top = Math.round(item.note.top + delta.y);
-      moveNote(item.id, left, top);
+      moveNote(item.note, left, top);
       return undefined;
     },
   });
@@ -39,16 +47,18 @@ export default function CrimeBoard() {
   const handleDoubleClick = useCallback(
     async (e) => {
       const addedNote = await addNote({ text: "" });
-      const addedNoteId = addedNote.id;
-      setNotes({
-        ...notes,
-        [addedNoteId]: {
-          ...addedNote,
-          toEdit: true,
-          top: e.pageY - e.target.offsetTop * 2,
-          left: e.pageX,
-        },
-      });
+      setNotes(
+        update(notes, {
+          [addedNote.id]: {
+            $set: {
+              ...addedNote,
+              top: e.pageY - e.target.offsetTop * 2,
+              left: e.pageX,
+              toEdit: true,
+            },
+          },
+        })
+      );
     },
     [notes]
   );
