@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import update from "immutability-helper";
 
-import { editNote } from "../lib/notes";
+import { editNote, deleteNote } from "../lib/notes";
 import { useNotes } from "../lib/notes-provider";
 
 export default function EditableNote({ note }) {
@@ -52,6 +52,17 @@ export default function EditableNote({ note }) {
     e.target.value = "";
     e.target.value = temp_value;
   });
+  const handleBtnClick = useCallback(
+    (e) => {
+      setNotes(
+        update(notes, {
+          $unset: [note.id],
+        })
+      );
+      deleteNote({ id: note.id });
+    },
+    [notes, note]
+  );
 
   useEffect(() => {
     if (isEditing) {
@@ -60,8 +71,22 @@ export default function EditableNote({ note }) {
   }, [isEditing]);
 
   const savedNote = (
-    <div className="note" onDoubleClick={handleDoubleClick}>
-      {text}
+    <div style={{ position: "relative" }}>
+      <span
+        class="dot"
+        style={{ position: "absolute", right: "50%", top: "10px" }}
+      ></span>
+      <button
+        type="button"
+        style={{ position: "absolute", right: "0" }}
+        className="delete-btn"
+        onClick={handleBtnClick}
+      >
+        &#10006;
+      </button>
+      <div className="note" onDoubleClick={handleDoubleClick}>
+        {text}
+      </div>
     </div>
   );
   const noteEditor = (
@@ -74,9 +99,10 @@ export default function EditableNote({ note }) {
       onFocus={handleFocus}
     />
   );
-  if (!text && !isEditing) {
-    return null;
-  } else {
-    return <>{isEditing ? noteEditor : savedNote}</>;
-  }
+  return <>{isEditing ? noteEditor : savedNote}</>;
+  // if (!text && !isEditing) {
+  //   return null;
+  // } else {
+  //   return <>{isEditing ? noteEditor : savedNote}</>;
+  // }
 }
