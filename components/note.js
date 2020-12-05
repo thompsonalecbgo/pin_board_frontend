@@ -1,6 +1,6 @@
 export default function Note({ text }) {
   return (
-    <div>
+    <div className="note">
       {text}
     </div>
   );

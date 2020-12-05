@@ -1,6 +1,7 @@
 import { useEffect, useState, memo } from "react";
 
 import EditableNote from "../components/editable-note";
+import Note from "../components/note";
 
 const styles = {
   position: "absolute",
@@ -12,7 +13,7 @@ const styles = {
 export const NoteDragPreview = memo(({ note }) => {
   return (
     <div>
-      <EditableNote note={note} />
+      <Note text={note.text} />
     </div>
   );
 });

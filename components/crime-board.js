@@ -47,7 +47,6 @@ export default function CrimeBoard(props) {
       console.log(e)
       const addedNote = await addNote({ text: "" });
       const addedNoteId = addedNote.id;
-      let currentTargetRect = 0
       setNotes({
         ...notes,
         [addedNoteId]: {
