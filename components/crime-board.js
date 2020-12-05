@@ -11,7 +11,7 @@ function renderNote(note) {
   return <DraggableNote key={note.id} note={note} />;
 }
 
-function prepareNotes(notes) {
+export function prepareNotes(notes) {
   const savedNotes = notes.map((note) => {
     return { ...note, top: 0, left: 0, toEdit: false };
   });

@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import { NotesProvider } from "../components/notes-provider";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <NotesProvider>
+      <Component {...pageProps} />
+    </NotesProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
