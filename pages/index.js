@@ -23,18 +23,19 @@ export default function Home(props) {
 
   return (
     <>
-      <DndProvider backend={HTML5Backend}>
-        <Head>
-          <title>Crime Board</title>
-        </Head>
-        <div>Create your own crime board for fun!</div>
-        <NotesProviderContext.Provider value={[notes, setNotes]}>
-          <LinksProviderContext.Provider value={[links, setLinks]}>
+      <Head>
+        <title>Crime Board</title>
+      </Head>
+      <div>Create your own crime board for fun!</div>
+
+      <NotesProviderContext.Provider value={[notes, setNotes]}>
+        <LinksProviderContext.Provider value={[links, setLinks]}>
+          <DndProvider backend={HTML5Backend}>
             <CrimeBoard />
             <CrimeBoardDragLayer />
-          </LinksProviderContext.Provider>
-        </NotesProviderContext.Provider>
-      </DndProvider>
+          </DndProvider>
+        </LinksProviderContext.Provider>
+      </NotesProviderContext.Provider>
     </>
   );
 }

@@ -18,11 +18,6 @@ function getLayerStyles() {
 }
 
 function getItemStyles(initialOffset, currentOffset, count, prevLoc) {
-  // if (count < 10) {
-  //   return {
-  //     display: "none",
-  //   };
-  // }
   if (!initialOffset || !currentOffset) {
     return {
       display: "none",

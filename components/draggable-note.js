@@ -11,7 +11,7 @@ function getStyles(left, top, isDragging) {
     position: "absolute",
     transform,
     WebkitTransform: transform,
-    opacity: isDragging ? 0 : 1,
+    opacity: isDragging ? 0.5 : 1,
     height: isDragging ? 0 : "",
   };
 }

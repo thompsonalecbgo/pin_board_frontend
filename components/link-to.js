@@ -1,4 +1,4 @@
-export function LinkTo({ x, y, x1, y1 }) {
+export default function LinkTo({ x, y, x1, y1, offsetX, offsetY }) {
   const height = Math.abs(y1 - y);
   const width = Math.abs(x1 - x);
   const hypotenuse = Math.sqrt(width ** 2 + height ** 2);
@@ -28,8 +28,11 @@ export function LinkTo({ x, y, x1, y1 }) {
     WebkitTransform: `rotate(${rotateBy}rad)`,
     borderTop: "1px solid black",
     position: "absolute",
-    top: "3.5px",
-    left: "3.5px",
+    top: `${offsetY}px`,
+    left: `${offsetX}px`,
   };
+
   return <span className="pin-line" style={styles}></span>;
 }
+
+// TEST START LINK POINT
