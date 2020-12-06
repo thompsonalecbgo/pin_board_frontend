@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { Note } from "../components/editable-note";
 
 const styles = {
   position: "absolute",
@@ -8,8 +9,8 @@ const styles = {
 
 export const NoteDragPreview = memo(({ note }) => {
   return (
-    <div className="note" style={styles}>
-      {note.text}
+    <div style={styles}>
+      <Note text={note.text} />
     </div>
   );
 });

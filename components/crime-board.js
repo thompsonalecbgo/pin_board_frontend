@@ -8,10 +8,7 @@ import { useNotes } from "../lib/notes-provider";
 import { useLinks } from "../lib/links-provider";
 import DraggableNote from "../components/draggable-note";
 import LinkTo from "../components/link-to";
-
-const pinFromTop = 10;
-const pinWidthHalf = 7 / 2;
-const noteWidthHalf = 200 / 2;
+import { pinWidthHalf, noteWidthHalf, pinFromTop } from "../lib/item-sizes";
 
 export function renderLink(note1, note2) {
   const x = note1.left;

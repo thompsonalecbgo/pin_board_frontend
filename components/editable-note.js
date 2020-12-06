@@ -5,6 +5,19 @@ import update from "immutability-helper";
 import { editNote, deleteNote } from "../lib/notes";
 import { useNotes } from "../lib/notes-provider";
 import DraggablePin from "../components/draggable-pin";
+import { noteWidth } from "../lib/item-sizes";
+
+const styles = {
+  width: `${noteWidth}px`,
+};
+
+export function Note({ text }) {
+  return (
+    <div className="note" style={styles}>
+      {text}
+    </div>
+  );
+}
 
 export default function EditableNote({ note }) {
   let inputRef;
@@ -71,36 +84,38 @@ export default function EditableNote({ note }) {
     }
   }, [isEditing]);
 
-  const savedNote = (
-    <div style={{ position: "relative" }}>
+  const btnAndPin = (
+    <>
       <button
         type="button"
-        style={{ position: "absolute", right: "0" }}
+        style={{ position: "absolute", right: "0", top: "0" }}
         className="delete-btn"
         onClick={handleBtnClick}
       >
         &#10006;
       </button>
-      <div className="note" onDoubleClick={handleDoubleClick}>
-        {text}
-      </div>
       <DraggablePin note={note} />
+    </>
+  );
+  const savedNote = (
+    <div style={{ position: "relative" }} onDoubleClick={handleDoubleClick}>
+      <Note text={text} />
+      {btnAndPin}
     </div>
   );
   const noteEditor = (
-    <TextareaAutosize
-      ref={(tag) => (inputRef = tag)}
-      className="edit-note"
-      value={text}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      onFocus={handleFocus}
-    />
+    <div style={{ position: "relative" }}>
+      <TextareaAutosize
+        ref={(tag) => (inputRef = tag)}
+        className="edit-note"
+        style={styles}
+        value={text}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+      />
+      {btnAndPin}
+    </div>
   );
   return <>{isEditing ? noteEditor : savedNote}</>;
-  // if (!text && !isEditing) {
-  //   return null;
-  // } else {
-  //   return <>{isEditing ? noteEditor : savedNote}</>;
-  // }
 }

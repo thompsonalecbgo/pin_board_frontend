@@ -19,18 +19,15 @@ a {
 html,
 body,
 #__next {
+  background-color: #e07a5f;
   height: 100%;
   width: 100%;
-}
-
-body {
-  background-color: #e07a5f;
 }
 
 #crime-board {
+  position: relative;
   height: 100%;
   width: 100%;
-  position: relative;
 }
 
 .note {
@@ -38,9 +35,7 @@ body {
   border: 1px black solid;
   box-shadow: 4px 4px 0px #000;
   padding: 20px;
-  width: 200px;
   word-wrap: break-word;
-  display: inline-block;
 }
 
 .edit-note {
@@ -50,25 +45,13 @@ body {
   outline: none;
   font: inherit;
   padding: 20px;
-  width: 200px;
   word-wrap: break-word;
-}
-
-div {
-  -webkit-user-select: none; /* Chrome/Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+ */
-
-  /* Rules below not implemented in browsers yet */
-  -o-user-select: none;
-  user-select: none;
 }
 
 .delete-btn {
   background-color: white;
   border: 1px black solid;
   outline: none;
-  /* opacity: 0.5; */
 }
 
 .delete-btn:hover {
@@ -80,10 +63,7 @@ div {
 }
 
 .pin {
-  height: 7px;
-  width: 7px;
   background-color: #e63946;
-  border-radius: 100%;
   border: 1px black solid;
-  display: inline-block;
+  border-radius: 100%;
 }

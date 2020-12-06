@@ -3,12 +3,14 @@ import { useDrag, useDrop } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
 import { ItemTypes } from "../lib/item-types";
+import { pinWidth, pinFromTop } from "../lib/item-sizes";
 
 const styles = {
   position: "absolute",
-  right: "50%",
+  top: `${pinFromTop}px`,
   left: "50%",
-  top: "10px",
+  height: `${pinWidth}px`,
+  width: `${pinWidth}px`,
 };
 
 export default function DraggablePin({ note }) {
@@ -26,11 +28,13 @@ export default function DraggablePin({ note }) {
       droppedNote: monitor.getItem(),
     }),
   });
+  
   const ref = useRef(null);
   drag(drop(ref));
   useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true });
   });
+  
   return (
     <>
       <span ref={ref} className="pin" style={styles}></span>
