@@ -6,6 +6,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import normalizeArray from "../lib/normalize-array";
 import { getNotesData } from "../lib/notes";
 import { NotesProviderContext } from "../lib/notes-provider";
+import { LinksProviderContext } from "../lib/links-provider";
 import CrimeBoard from "../components/crime-board";
 import CrimeBoardDragLayer from "../components/crime-board-drag-layer";
 
@@ -18,6 +19,7 @@ function prepareNotes(notes) {
 
 export default function Home(props) {
   const [notes, setNotes] = useState(prepareNotes(props.notes));
+  const [links, setLinks] = useState({ 278: 279 });
 
   return (
     <>
@@ -27,8 +29,10 @@ export default function Home(props) {
       <div>Create your own crime board for fun!</div>
       <DndProvider backend={HTML5Backend}>
         <NotesProviderContext.Provider value={[notes, setNotes]}>
-          <CrimeBoard />
-          <CrimeBoardDragLayer />
+          <LinksProviderContext.Provider value={[links, setLinks]}>
+            <CrimeBoard />
+            <CrimeBoardDragLayer />
+          </LinksProviderContext.Provider>
         </NotesProviderContext.Provider>
       </DndProvider>
     </>

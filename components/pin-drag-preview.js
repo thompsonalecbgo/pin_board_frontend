@@ -1,6 +1,6 @@
 import { useEffect, useState, memo } from "react";
 
-import { LineTo } from "../components/line-to";
+import { LinkTo } from "./link-to";
 
 export const PinDragPreview = memo(({ initialOffset, currentOffset }) => {
   if (!initialOffset || !currentOffset) {
@@ -16,9 +16,10 @@ export const PinDragPreview = memo(({ initialOffset, currentOffset }) => {
       top: "3.5px",
       left: "3.5px",
     };
+    
     return (
       <span style={styles}>
-        <LineTo x={x} y={y} x1={x1} y1={y1} />
+        <LinkTo x={x} y={y} x1={x1} y1={y1} />
       </span>
     );
   }

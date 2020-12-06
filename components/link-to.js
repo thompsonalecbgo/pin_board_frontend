@@ -1,4 +1,4 @@
-export function LineTo({ x, y, x1, y1 }) {
+export function LinkTo({ x, y, x1, y1 }) {
   const height = Math.abs(y1 - y);
   const width = Math.abs(x1 - x);
   const hypotenuse = Math.sqrt(width ** 2 + height ** 2);
@@ -17,7 +17,6 @@ export function LineTo({ x, y, x1, y1 }) {
     transformOrigin = "0 0";
     rotateBy = angle;
   } else if (y1 < y && x1 > x) {
-    console.log("go up right");
     transformOrigin = "0 0";
     rotateBy = Math.PI - angle;
   }
@@ -27,6 +26,8 @@ export function LineTo({ x, y, x1, y1 }) {
     transformOrigin,
     transform: `rotate(${rotateBy}rad)`,
     WebkitTransform: `rotate(${rotateBy}rad)`,
+    position: "absolute",
+    borderTop: "1px solid black",
   };
   return <span className="pin-line" style={styles}></span>;
 }

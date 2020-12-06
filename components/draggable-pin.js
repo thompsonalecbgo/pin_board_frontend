@@ -26,5 +26,9 @@ export default function DraggablePin() {
   useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true });
   });
-  return <span ref={ref} className="pin" style={styles}></span>;
+  return (
+    <>
+      <span ref={ref} className="pin" style={styles}></span>
+    </>
+  );
 }

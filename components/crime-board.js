@@ -5,6 +5,7 @@ import update from "immutability-helper";
 import { ItemTypes } from "../lib/item-types";
 import { addNote, editNote } from "../lib/notes";
 import { useNotes } from "../lib/notes-provider";
+
 import DraggableNote from "../components/draggable-note";
 
 function renderNote(note) {
@@ -69,3 +70,5 @@ export default function CrimeBoard() {
     </div>
   );
 }
+
+// TODO: if notes is gone delete link
