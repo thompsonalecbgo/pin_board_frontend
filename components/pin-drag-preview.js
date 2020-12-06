@@ -12,9 +12,9 @@ export const PinDragPreview = memo(({ initialOffset, currentOffset }) => {
     const y1 = currentOffset.y;
 
     const styles = {
-      position: "absolute",
-      top: "3.5px",
-      left: "3.5px",
+      // position: "absolute",
+      // top: "3.5px",
+      // left: "3.5px",
     };
     
     return (

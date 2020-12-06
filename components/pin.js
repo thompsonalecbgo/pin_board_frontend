@@ -22,8 +22,7 @@ function renderLink(noteId) {
 export default function Pin({ note }) {
   return (
     <>
-      <DraggablePin />
-      {renderLink(note.id)}
+      <DraggablePin>{renderLink(note.id)}</DraggablePin>
     </>
   );
 }

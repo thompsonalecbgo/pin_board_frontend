@@ -7,7 +7,7 @@ import { PinDragPreview } from "../components/pin-drag-preview";
 const layerStyles = {
   position: "fixed",
   pointerEvents: "none",
-  zIndex: 100,
+  zIndex: 1000,
   left: 0,
   top: 0,
   width: "100%",
@@ -59,12 +59,13 @@ export default function CrimeBoardDragLayer() {
   }
   if (!isDragging) {
     return null;
-  }
-  return (
-    <div style={layerStyles}>
-      <div style={getItemStyles(initialOffset, currentOffset)}>
-        {renderItem()}
+  } else {
+    return (
+      <div style={layerStyles}>
+        <div style={getItemStyles(initialOffset, currentOffset)}>
+          {renderItem()}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

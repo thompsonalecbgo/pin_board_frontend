@@ -26,8 +26,10 @@ export function LinkTo({ x, y, x1, y1 }) {
     transformOrigin,
     transform: `rotate(${rotateBy}rad)`,
     WebkitTransform: `rotate(${rotateBy}rad)`,
-    position: "absolute",
     borderTop: "1px solid black",
+    position: "absolute",
+    top: "3.5px",
+    left: "3.5px",
   };
   return <span className="pin-line" style={styles}></span>;
 }

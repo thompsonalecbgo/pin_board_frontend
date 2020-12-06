@@ -5,6 +5,7 @@ import update from "immutability-helper";
 import { editNote, deleteNote } from "../lib/notes";
 import { useNotes } from "../lib/notes-provider";
 import Pin from "../components/pin";
+import DraggablePin from "../components/draggable-pin";
 
 export default function EditableNote({ note }) {
   let inputRef;
@@ -73,7 +74,6 @@ export default function EditableNote({ note }) {
 
   const savedNote = (
     <div style={{ position: "relative" }}>
-      <Pin note={note} />
       <button
         type="button"
         style={{ position: "absolute", right: "0" }}
@@ -85,6 +85,7 @@ export default function EditableNote({ note }) {
       <div className="note" onDoubleClick={handleDoubleClick}>
         {text}
       </div>
+      <DraggablePin note={note} />
     </div>
   );
   const noteEditor = (
