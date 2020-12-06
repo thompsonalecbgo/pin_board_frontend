@@ -4,7 +4,6 @@ import update from "immutability-helper";
 
 import { editNote, deleteNote } from "../lib/notes";
 import { useNotes } from "../lib/notes-provider";
-import Pin from "../components/pin";
 import DraggablePin from "../components/draggable-pin";
 
 export default function EditableNote({ note }) {

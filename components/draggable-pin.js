@@ -32,7 +32,7 @@ export default function DraggablePin({ note }) {
   });
   const [{ droppedNote, didDrop }, drop] = useDrop({
     accept: ItemTypes.PIN,
-    // drop: () => moveKnight(x, y),
+    // drop: () => console.log("hello"),
     collect: (monitor) => ({
       didDrop: !!monitor.didDrop(),
       droppedNote: monitor.getItem()
@@ -49,11 +49,6 @@ export default function DraggablePin({ note }) {
   useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true });
   });
-  useEffect(() => {
-    if (didDrop) {
-      console.log(droppedNote)
-    }
-  })
   return (
     <>
       <span ref={ref} className="pin" style={styles}>

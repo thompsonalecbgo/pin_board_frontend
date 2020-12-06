@@ -25,7 +25,7 @@ export default function DraggableNote({ note }) {
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
-    canDrag: !note.isEdit
+    canDrag: !note.isEdit,
   });
 
   useEffect(() => {

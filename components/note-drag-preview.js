@@ -1,17 +1,15 @@
 import { memo } from "react";
 
-import Note from "../components/note";
-
 const styles = {
-  display: "inline-block",
+  position: "absolute",
   transform: "rotate(-7deg)",
   WebkitTransform: "rotate(-7deg)",
 };
 
 export const NoteDragPreview = memo(({ note }) => {
   return (
-    <div style={styles}>
-      <Note text={note.text} />
+    <div className="note" style={styles}>
+      {note.text}
     </div>
   );
 });

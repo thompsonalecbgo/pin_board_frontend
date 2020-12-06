@@ -19,15 +19,15 @@ function prepareNotes(notes) {
 
 export default function Home(props) {
   const [notes, setNotes] = useState(prepareNotes(props.notes));
-  const [links, setLinks] = useState({ 278: 279 });
+  const [links, setLinks] = useState({ 289: 290 });
 
   return (
     <>
-      <Head>
-        <title>Crime Board</title>
-      </Head>
-      <div>Create your own crime board for fun!</div>
       <DndProvider backend={HTML5Backend}>
+        <Head>
+          <title>Crime Board</title>
+        </Head>
+        <div>Create your own crime board for fun!</div>
         <NotesProviderContext.Provider value={[notes, setNotes]}>
           <LinksProviderContext.Provider value={[links, setLinks]}>
             <CrimeBoard />
