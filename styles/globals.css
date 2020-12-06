@@ -64,24 +64,29 @@ div {
 }
 
 .delete-btn {
-  background-color: white; 
-  border: 1px black solid; 
+  background-color: white;
+  border: 1px black solid;
   outline: none;
   /* opacity: 0.5; */
 }
 
 .delete-btn:hover {
-  background-color: #fcd5ce; 
+  background-color: #fcd5ce;
 }
 
 .delete-btn:active {
-  background-color: #ffb5a7; 
+  background-color: #ffb5a7;
 }
 
-.dot {
+.pin {
   height: 7px;
   width: 7px;
   background-color: #e63946;
   border-radius: 50%;
-  border: 1px black solid; 
+  border: 1px black solid;
+}
+
+.pin-line {
+  position: absolute;
+  border-top: 1px solid black;
 }

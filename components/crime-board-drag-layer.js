@@ -2,6 +2,7 @@ import { useDragLayer } from "react-dnd";
 
 import { ItemTypes } from "../lib/item-types";
 import { NoteDragPreview } from "../components/note-drag-preview";
+import { PinDragPreview } from "../components/pin-drag-preview";
 
 const layerStyles = {
   position: "fixed",
@@ -45,6 +46,13 @@ export default function CrimeBoardDragLayer() {
     switch (itemType) {
       case ItemTypes.NOTE:
         return <NoteDragPreview note={item.note} />;
+      case ItemTypes.PIN:
+        return (
+          <PinDragPreview
+            initialOffset={initialOffset}
+            currentOffset={currentOffset}
+          />
+        );
       default:
         return null;
     }
