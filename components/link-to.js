@@ -26,7 +26,7 @@ export default function LinkTo({ x, y, x1, y1, offsetX, offsetY }) {
     transformOrigin,
     transform: `rotate(${rotateBy}rad)`,
     WebkitTransform: `rotate(${rotateBy}rad)`,
-    borderTop: "1px solid black",
+    // borderTop: "1px solid black",
     position: "absolute",
     top: `${offsetY}px`,
     left: `${offsetX}px`,

@@ -19,7 +19,7 @@ a {
 html,
 body,
 #__next {
-  background-color: #e07a5f;
+  background-color: #8d99ae;
   height: 100%;
   width: 100%;
 }
@@ -31,17 +31,17 @@ body,
 }
 
 .note {
-  background-color: white;
-  border: 1px black solid;
-  box-shadow: 4px 4px 0px #000;
+  background-color: #edf2f4;
+  border: 1px #2b2d42 solid;
+  box-shadow: 4px 4px 0px #2b2d42;
   padding: 20px;
   word-wrap: break-word;
 }
 
 .edit-note {
-  background-color: white;
-  border: 1px black solid;
-  box-shadow: 4px 4px 0px #000;
+  background-color: #edf2f4;
+  border: 1px #2b2d42 solid;
+  box-shadow: 4px 4px 0px #2b2d42;
   outline: none;
   font: inherit;
   padding: 20px;
@@ -49,21 +49,26 @@ body,
 }
 
 .delete-btn {
-  background-color: white;
-  border: 1px black solid;
+  background-color: #edf2f4;
+  border: 1px #2b2d42 solid;
   outline: none;
 }
 
 .delete-btn:hover {
-  background-color: #fcd5ce;
+  background-color: #8d99ae;
 }
 
 .delete-btn:active {
-  background-color: #ffb5a7;
+  background-color: #2b2d42;
+  opacity: 0.75;
 }
 
 .pin {
-  background-color: #e63946;
-  border: 1px black solid;
+  background-color: #f4d58d;
+  border: 1px #2b2d42 solid;
   border-radius: 100%;
+}
+
+.pin-line {
+  border-top: 2px #f4d58d solid;
 }

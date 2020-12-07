@@ -88,7 +88,7 @@ export default function CrimeBoard() {
   return (
     <div id="crime-board" ref={drop} onDoubleClick={handleDoubleClick}>
       {Object.keys(notes).map((key) => renderNote(notes[key]))}
-      {Object.keys(notes).map((key) => {
+      {Object.keys(links).map((key) => {
         if (!links[key]) {
           return null;
         } else {
