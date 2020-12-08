@@ -19,7 +19,7 @@ function prepareNotes(notes) {
 
 export default function Home(props) {
   const [notes, setNotes] = useState(prepareNotes(props.notes));
-  const [links, setLinks] = useState({ 289: 290 });
+  const [links, setLinks] = useState([{ note1: 289, note2: 290 }]);
 
   return (
     <>
@@ -46,3 +46,5 @@ export async function getStaticProps() {
     revalidate: 1,
   };
 }
+
+// ADD INSTRUCTIONS

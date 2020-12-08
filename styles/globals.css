@@ -38,6 +38,10 @@ body,
   word-wrap: break-word;
 }
 
+.note:hover {
+  cursor: grab;
+}
+
 .edit-note {
   background-color: #edf2f4;
   border: 1px #2b2d42 solid;
@@ -69,6 +73,18 @@ body,
   border-radius: 100%;
 }
 
+.pin:hover {
+  cursor: grab;
+}
+
 .pin-line {
   border-top: 2px #f4d58d solid;
+}
+
+.pin-line:hover {
+  opacity: 0.75;
+}
+
+.pin-line:active {
+  opacity: 0.5;
 }

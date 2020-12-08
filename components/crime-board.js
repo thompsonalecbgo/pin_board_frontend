@@ -10,20 +10,22 @@ import DraggableNote from "../components/draggable-note";
 import LinkTo from "../components/link-to";
 import { pinWidthHalf, noteWidthHalf, pinFromTop } from "../lib/item-sizes";
 
-export function renderLink(note1, note2) {
+export function renderLink(note1, note2, id) {
   const x = note1.left;
   const y = note1.top;
   const x1 = note2.left;
   const y1 = note2.top;
   return (
     <LinkTo
-      key={note1.id}
+      key={id}
       x={x}
       y={y}
       x1={x1}
       y1={y1}
       offsetX={x1 + noteWidthHalf + pinWidthHalf}
       offsetY={y1 + pinWidthHalf + pinFromTop}
+      note1={note1}
+      note2={note2}
     />
   );
 }
@@ -88,12 +90,15 @@ export default function CrimeBoard() {
   return (
     <div id="crime-board" ref={drop} onDoubleClick={handleDoubleClick}>
       {Object.keys(notes).map((key) => renderNote(notes[key]))}
-      {Object.keys(links).map((key) => {
+      {/* {Object.keys(links).map((key) => {
         if (!links[key]) {
           return null;
         } else {
           return renderLink(notes[links[key]], notes[key]);
         }
+      })} */}
+      {links.map((link, index) => {
+        return renderLink(notes[link.note1], notes[link.note2], index);
       })}
     </div>
   );

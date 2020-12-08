@@ -6,6 +6,7 @@ import update from "immutability-helper";
 import { ItemTypes } from "../lib/item-types";
 import { pinWidth, pinFromTop } from "../lib/item-sizes";
 import { useLinks } from "../lib/links-provider";
+import { findLink } from "../lib/links";
 
 const styles = {
   position: "absolute",
@@ -20,16 +21,11 @@ export default function DraggablePin({ note }) {
 
   const connectNotes = useCallback(
     (note1, note2) => {
-      if (links[note1.id]) {
-        console.log("hi sandy")
-      } else if (links[note2.id]) {
-        console.log("hi georgie")
-      } else {
+      const linksFound = findLink(links, note1, note2);
+      if (linksFound.length == 0) {
         setLinks(
           update(links, {
-            [note1.id]: {
-              $set: note2.id,
-            },
+            $push: [{ note1: note1.id, note2: note2.id }],
           })
         );
       }
