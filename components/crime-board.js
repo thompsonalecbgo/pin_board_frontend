@@ -30,8 +30,8 @@ export function renderLink(note1, note2, id) {
   );
 }
 
-function renderNote(note) {
-  return <DraggableNote key={note.id} note={note} />;
+function renderNote(note, index) {
+  return <DraggableNote key={index} note={note} />;
 }
 
 export default function CrimeBoard() {
@@ -89,16 +89,15 @@ export default function CrimeBoard() {
 
   return (
     <div id="crime-board" ref={drop} onDoubleClick={handleDoubleClick}>
-      {Object.keys(notes).map((key) => renderNote(notes[key]))}
-      {/* {Object.keys(links).map((key) => {
-        if (!links[key]) {
+      {Object.keys(notes).map((key, index) => {
+        return renderNote(notes[key], index);
+      })}
+      {links.map((link, index) => {
+        if (!notes[link.note1] || !notes[link.note2]) {
           return null;
         } else {
-          return renderLink(notes[links[key]], notes[key]);
+          return renderLink(notes[link.note1], notes[link.note2], index);
         }
-      })} */}
-      {links.map((link, index) => {
-        return renderLink(notes[link.note1], notes[link.note2], index);
       })}
     </div>
   );

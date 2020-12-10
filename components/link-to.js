@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 
 import { useLinks } from "../lib/links-provider";
 import { findLink, findOtherLinks } from "../lib/links";
+import { deleteLink } from "../lib/links";
 
 export default function LinkTo({
   x,
@@ -51,8 +52,12 @@ export default function LinkTo({
   const handleDoubleClick = useCallback(
     (e) => {
       e.stopPropagation();
-      const linksFound = findOtherLinks(links, note1, note2);
-      setLinks(linksFound);
+      const linkFound = findLink(links, note1, note2);
+      const otherLinksFound = findOtherLinks(links, note1, note2);
+      setLinks(otherLinksFound);
+      if (linkFound.length > 0) {
+        deleteLink({ id: linkFound[0].id})
+      }
     },
     [links, note1, note2]
   );
@@ -66,6 +71,7 @@ export default function LinkTo({
   );
 }
 
-export function LinkNotes({ note1, note2 }) {}
-
 // TEST START LINK POINT
+
+// CREATE NOTES
+// DELETE NOTES

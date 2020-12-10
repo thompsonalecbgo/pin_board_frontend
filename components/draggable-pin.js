@@ -7,6 +7,7 @@ import { ItemTypes } from "../lib/item-types";
 import { pinWidth, pinFromTop } from "../lib/item-sizes";
 import { useLinks } from "../lib/links-provider";
 import { findLink } from "../lib/links";
+import { addLink } from "../lib/links";
 
 const styles = {
   position: "absolute",
@@ -23,6 +24,7 @@ export default function DraggablePin({ note }) {
     (note1, note2) => {
       const linksFound = findLink(links, note1, note2);
       if (linksFound.length == 0) {
+        addLink({ note1: note1.id, note2: note2.id });
         setLinks(
           update(links, {
             $push: [{ note1: note1.id, note2: note2.id }],

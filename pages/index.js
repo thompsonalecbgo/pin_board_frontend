@@ -5,6 +5,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 import normalizeArray from "../lib/normalize-array";
 import { getNotesData } from "../lib/notes";
+import { getLinksData } from "../lib/links"
 import { NotesProviderContext } from "../lib/notes-provider";
 import { LinksProviderContext } from "../lib/links-provider";
 import CrimeBoard from "../components/crime-board";
@@ -19,7 +20,7 @@ function prepareNotes(notes) {
 
 export default function Home(props) {
   const [notes, setNotes] = useState(prepareNotes(props.notes));
-  const [links, setLinks] = useState([{ note1: 289, note2: 290 }]);
+  const [links, setLinks] = useState(props.links);
 
   return (
     <>
@@ -41,8 +42,9 @@ export default function Home(props) {
 
 export async function getStaticProps() {
   const notes = (await getNotesData()) || [];
+  const links = (await getLinksData()) || [];
   return {
-    props: { notes },
+    props: { notes, links },
     revalidate: 1,
   };
 }
