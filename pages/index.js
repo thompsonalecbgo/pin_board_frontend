@@ -44,7 +44,7 @@ export default function Home(props) {
   return (
     <>
       <Head>
-        <title>Crime Board</title>
+        <title>Pin Board</title>
       </Head>
       {/* <div>Create your own crime board for fun!</div> */}
       <NotesProviderContext.Provider value={[notes, setNotes]}>
