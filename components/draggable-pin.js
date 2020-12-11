@@ -4,10 +4,9 @@ import { getEmptyImage } from "react-dnd-html5-backend";
 import update from "immutability-helper";
 
 import { ItemTypes } from "../lib/item-types";
-import { pinWidth, pinFromTop } from "../lib/item-sizes";
 import { useLinks } from "../lib/links-provider";
-import { findLink } from "../lib/links";
-import { addLink } from "../lib/links";
+import { findLink, addLink } from "../lib/links";
+import { pinWidth, pinFromTop } from "../lib/item-sizes";
 import getDictValues from "../lib/get-dict-values";
 
 const styles = {
@@ -36,27 +35,19 @@ export default function DraggablePin({ note }) {
             },
           })
         );
-        // setLinks(
-        //   update(links, {
-        //     $push: [{ note1: note1.id, note2: note2.id }],
-        //   })
-        // );
       }
     },
     [links]
   );
 
-  const [{ isDragging }, drag, preview] = useDrag({
+  const [, drag, preview] = useDrag({
     item: { type: ItemTypes.PIN, note },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
   });
-  const [{ droppedItem, didDrop }, drop] = useDrop({
+  
+  const [{ droppedItem }, drop] = useDrop({
     accept: ItemTypes.PIN,
     drop: () => connectNotes(note, droppedItem.note),
     collect: (monitor) => ({
-      didDrop: !!monitor.didDrop(),
       droppedItem: monitor.getItem(),
     }),
   });

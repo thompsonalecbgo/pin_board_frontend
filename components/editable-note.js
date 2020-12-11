@@ -2,9 +2,9 @@ import { useEffect, useState, useCallback } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import update from "immutability-helper";
 
-import { editNote, deleteNote } from "../lib/notes";
-import { useNotes } from "../lib/notes-provider";
 import DraggablePin from "../components/draggable-pin";
+import { useNotes } from "../lib/notes-provider";
+import { editNote, deleteNote } from "../lib/notes";
 import { noteWidth } from "../lib/item-sizes";
 
 const styles = {
@@ -39,9 +39,11 @@ export default function EditableNote({ note }) {
     },
     [notes, note]
   );
+
   const handleChange = useCallback((e) => {
     setText(e.target.value);
   });
+
   const handleBlur = useCallback(
     (e) => {
       setEditing(false);
@@ -61,11 +63,13 @@ export default function EditableNote({ note }) {
     },
     [notes, note]
   );
+
   const handleFocus = useCallback((e) => {
     var temp_value = e.target.value;
     e.target.value = "";
     e.target.value = temp_value;
   });
+
   const handleBtnClick = useCallback(
     (e) => {
       setNotes(
@@ -97,12 +101,14 @@ export default function EditableNote({ note }) {
       <DraggablePin note={note} />
     </>
   );
+
   const savedNote = (
     <div style={{ position: "relative" }} onDoubleClick={handleDoubleClick}>
       <Note text={text} />
       {btnAndPin}
     </div>
   );
+
   const noteEditor = (
     <div style={{ position: "relative" }}>
       <TextareaAutosize
@@ -117,5 +123,6 @@ export default function EditableNote({ note }) {
       {btnAndPin}
     </div>
   );
+  
   return <>{isEditing ? noteEditor : savedNote}</>;
 }

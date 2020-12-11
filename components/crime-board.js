@@ -2,12 +2,12 @@ import { useCallback } from "react";
 import { useDrop } from "react-dnd";
 import update from "immutability-helper";
 
+import DraggableNote from "../components/draggable-note";
+import LinkTo from "../components/link-to";
 import { ItemTypes } from "../lib/item-types";
 import { addNote, editNote } from "../lib/notes";
 import { useNotes } from "../lib/notes-provider";
 import { useLinks } from "../lib/links-provider";
-import DraggableNote from "../components/draggable-note";
-import LinkTo from "../components/link-to";
 import { pinWidthHalf, noteWidthHalf, pinFromTop } from "../lib/item-sizes";
 
 export function renderLink(note1, note2, id) {
@@ -92,13 +92,6 @@ export default function CrimeBoard() {
       {Object.keys(notes).map((key, index) => {
         return renderNote(notes[key], key);
       })}
-      {/* {links.map((link, index) => {
-        if (!notes[link.note1] || !notes[link.note2]) {
-          return null;
-        } else {
-          return renderLink(notes[link.note1], notes[link.note2], index);
-        }
-      })} */}
       {Object.keys(links).map((key, index) => {
         const note1 = notes[links[key].note1]
         const note2 = notes[links[key].note2]
@@ -111,5 +104,3 @@ export default function CrimeBoard() {
     </div>
   );
 }
-
-// TODO: if notes is gone delete link

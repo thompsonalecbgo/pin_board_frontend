@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import update from "immutability-helper";
 
 import { useLinks } from "../lib/links-provider";
-import { findLink, findOtherLinks } from "../lib/links";
+import { findLink } from "../lib/links";
 import { deleteLink } from "../lib/links";
 import getDictValues from "../lib/get-dict-values";
 
@@ -45,7 +45,6 @@ export default function LinkTo({
     transformOrigin,
     transform: `rotate(${rotateBy}rad)`,
     WebkitTransform: `rotate(${rotateBy}rad)`,
-    // borderTop: "1px solid black",
     position: "absolute",
     top: `${offsetY}px`,
     left: `${offsetX}px`,
@@ -54,16 +53,8 @@ export default function LinkTo({
   const handleDoubleClick = useCallback(
     (e) => {
       e.stopPropagation();
-
-      // deleteNote({ id: note.id });
-
       const linksAsDict = getDictValues(links);
       const linksFound = findLink(linksAsDict, note1, note2);
-
-      // const linkFound = findLink(links, note1, note2);
-      // const otherLinksFound = findOtherLinks(links, note1, note2);
-      // setLinks(otherLinksFound);
-
       if (linksFound.length > 0) {
         setLinks(
           update(links, {
@@ -84,8 +75,3 @@ export default function LinkTo({
     ></span>
   );
 }
-
-// TEST START LINK POINT
-
-// CREATE NOTES
-// DELETE NOTES
