@@ -90,13 +90,22 @@ export default function CrimeBoard() {
   return (
     <div id="crime-board" ref={drop} onDoubleClick={handleDoubleClick}>
       {Object.keys(notes).map((key, index) => {
-        return renderNote(notes[key], index);
+        return renderNote(notes[key], key);
       })}
-      {links.map((link, index) => {
+      {/* {links.map((link, index) => {
         if (!notes[link.note1] || !notes[link.note2]) {
           return null;
         } else {
           return renderLink(notes[link.note1], notes[link.note2], index);
+        }
+      })} */}
+      {Object.keys(links).map((key, index) => {
+        const note1 = notes[links[key].note1]
+        const note2 = notes[links[key].note2]
+        if (!note1 || !note2) {
+          return null;
+        } else {
+          return renderLink(note1, note2, key);
         }
       })}
     </div>

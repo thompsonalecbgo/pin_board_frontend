@@ -1,8 +1,10 @@
 import { useCallback, useState } from "react";
+import update from "immutability-helper";
 
 import { useLinks } from "../lib/links-provider";
 import { findLink, findOtherLinks } from "../lib/links";
 import { deleteLink } from "../lib/links";
+import getDictValues from "../lib/get-dict-values";
 
 export default function LinkTo({
   x,
@@ -52,11 +54,23 @@ export default function LinkTo({
   const handleDoubleClick = useCallback(
     (e) => {
       e.stopPropagation();
-      const linkFound = findLink(links, note1, note2);
-      const otherLinksFound = findOtherLinks(links, note1, note2);
-      setLinks(otherLinksFound);
-      if (linkFound.length > 0) {
-        deleteLink({ id: linkFound[0].id})
+
+      // deleteNote({ id: note.id });
+
+      const linksAsDict = getDictValues(links);
+      const linksFound = findLink(linksAsDict, note1, note2);
+
+      // const linkFound = findLink(links, note1, note2);
+      // const otherLinksFound = findOtherLinks(links, note1, note2);
+      // setLinks(otherLinksFound);
+
+      if (linksFound.length > 0) {
+        setLinks(
+          update(links, {
+            $unset: [linksFound[0].id],
+          })
+        );
+        deleteLink({ id: linksFound[0].id });
       }
     },
     [links, note1, note2]

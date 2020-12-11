@@ -18,9 +18,13 @@ function prepareNotes(notes) {
   return normalizeArray(savedNotes, "id");
 }
 
+function prepareLinks(links) {
+  return normalizeArray(links, "id")
+}
+
 export default function Home(props) {
   const [notes, setNotes] = useState(prepareNotes(props.notes));
-  const [links, setLinks] = useState(props.links);
+  const [links, setLinks] = useState(prepareLinks(props.links));
 
   return (
     <>

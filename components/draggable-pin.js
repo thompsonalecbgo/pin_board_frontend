@@ -8,6 +8,7 @@ import { pinWidth, pinFromTop } from "../lib/item-sizes";
 import { useLinks } from "../lib/links-provider";
 import { findLink } from "../lib/links";
 import { addLink } from "../lib/links";
+import getDictValues from "../lib/get-dict-values";
 
 const styles = {
   position: "absolute",
@@ -21,15 +22,25 @@ export default function DraggablePin({ note }) {
   const [links, setLinks] = useLinks();
 
   const connectNotes = useCallback(
-    (note1, note2) => {
-      const linksFound = findLink(links, note1, note2);
+    async (note1, note2) => {
+      const linksAsDict = getDictValues(links);
+      const linksFound = findLink(linksAsDict, note1, note2);
       if (linksFound.length == 0) {
-        addLink({ note1: note1.id, note2: note2.id });
+        const addedLink = await addLink({ note1: note1.id, note2: note2.id });
         setLinks(
           update(links, {
-            $push: [{ note1: note1.id, note2: note2.id }],
+            [addedLink.id]: {
+              $set: {
+                ...addedLink,
+              },
+            },
           })
         );
+        // setLinks(
+        //   update(links, {
+        //     $push: [{ note1: note1.id, note2: note2.id }],
+        //   })
+        // );
       }
     },
     [links]
