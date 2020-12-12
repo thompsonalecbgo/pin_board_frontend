@@ -40,6 +40,7 @@ export default function CrimeBoard() {
 
   const moveNote = useCallback(
     (movedNote, left, top) => {
+      console.log("Note moved")
       setNotes(
         update(notes, {
           [movedNote.id]: {
@@ -63,6 +64,7 @@ export default function CrimeBoard() {
   const handleDoubleClick = useCallback(
     async (e) => {
       const addedNote = await addNote({ text: "" });
+      console.log("Note added")
       setNotes(
         update(notes, {
           [addedNote.id]: {

@@ -52,6 +52,7 @@ export default function LinkTo({
 
   const handleDoubleClick = useCallback(
     (e) => {
+      console.log("Link deleted")
       e.stopPropagation();
       const linksAsDict = getDictValues(links);
       const linksFound = findLink(linksAsDict, note1, note2);

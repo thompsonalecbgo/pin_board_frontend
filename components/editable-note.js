@@ -27,6 +27,7 @@ export default function EditableNote({ note }) {
 
   const handleDoubleClick = useCallback(
     (e) => {
+      console.log("Note to edit")
       e.stopPropagation();
       // setEditing(true);
       setNotes(
@@ -49,6 +50,7 @@ export default function EditableNote({ note }) {
 
   const handleBlur = useCallback(
     (e) => {
+      console.log("Note edited")
       e.stopPropagation();
       // setText(e.target.value);
       // setEditing(false);
@@ -80,6 +82,7 @@ export default function EditableNote({ note }) {
 
   const handleBtnClick = useCallback(
     (e) => {
+      console.log("Note deleted")
       setNotes(
         update(notes, {
           $unset: [note.id],

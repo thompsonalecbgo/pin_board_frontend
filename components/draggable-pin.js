@@ -26,6 +26,7 @@ export default function DraggablePin({ note }) {
       const linksFound = findLink(linksAsDict, note1, note2);
       if (linksFound.length == 0) {
         const addedLink = await addLink({ note1: note1.id, note2: note2.id });
+        console.log("Link added")
         setLinks(
           update(links, {
             [addedLink.id]: {
