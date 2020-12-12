@@ -65,7 +65,7 @@ export async function getStaticProps() {
 
   return {
     props: { notes, links },
-    revalidate: 1,
+    // revalidate: 1,
   };
 }
 
