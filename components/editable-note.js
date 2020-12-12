@@ -49,6 +49,7 @@ export default function EditableNote({ note }) {
 
   const handleBlur = useCallback(
     (e) => {
+      console.log("notes edited")
       e.stopPropagation();
       setEditing(false);
       setNotes(
