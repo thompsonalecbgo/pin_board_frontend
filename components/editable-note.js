@@ -22,12 +22,12 @@ export function Note({ text }) {
 export default function EditableNote({ note }) {
   let inputRef;
   const [notes, setNotes] = useNotes();
-  const [text, setText] = useState(note.text);
+  // const [text, setText] = useState(note.text);
   // const [isEditing, setEditing] = useState(note.isEdit);
 
   const handleDoubleClick = useCallback(
     (e) => {
-      console.log("Note to edit")
+      console.log("Note to edit");
       e.stopPropagation();
       // setEditing(true);
       setNotes(
@@ -44,13 +44,26 @@ export default function EditableNote({ note }) {
     [notes, note]
   );
 
-  const handleChange = useCallback((e) => {
-    setText(e.target.value);
-  });
+  const handleChange = useCallback(
+    (e) => {
+      // setText(e.target.value);
+      setNotes(
+        update(notes, {
+          [note.id]: {
+            $merge: { text: e.target.value },
+          },
+          ["dateUpdated"]: {
+            $set: new Date().toString(),
+          },
+        })
+      );
+    },
+    [notes, note]
+  );
 
   const handleBlur = useCallback(
     (e) => {
-      console.log("Note edited")
+      console.log("Note edited");
       e.stopPropagation();
       // setText(e.target.value);
       // setEditing(false);
@@ -82,7 +95,7 @@ export default function EditableNote({ note }) {
 
   const handleBtnClick = useCallback(
     (e) => {
-      console.log("Note deleted")
+      console.log("Note deleted");
       setNotes(
         update(notes, {
           $unset: [note.id],
@@ -118,7 +131,7 @@ export default function EditableNote({ note }) {
 
   const savedNote = (
     <div style={{ position: "relative" }} onDoubleClick={handleDoubleClick}>
-      <Note text={text} />
+      <Note text={note.text} />
       {btnAndPin}
     </div>
   );
@@ -129,7 +142,7 @@ export default function EditableNote({ note }) {
         ref={(tag) => (inputRef = tag)}
         className="edit-note"
         style={styles}
-        value={text}
+        value={note.text}
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
