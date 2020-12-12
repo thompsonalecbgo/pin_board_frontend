@@ -23,12 +23,12 @@ export default function EditableNote({ note }) {
   let inputRef;
   const [notes, setNotes] = useNotes();
   const [text, setText] = useState(note.text);
-  const [isEditing, setEditing] = useState(note.isEdit);
+  // const [isEditing, setEditing] = useState(note.isEdit);
 
   const handleDoubleClick = useCallback(
     (e) => {
       e.stopPropagation();
-      setEditing(true);
+      // setEditing(true);
       setNotes(
         update(notes, {
           [note.id]: {
@@ -50,8 +50,8 @@ export default function EditableNote({ note }) {
   const handleBlur = useCallback(
     (e) => {
       e.stopPropagation();
-      setText(e.target.value);
-      setEditing(false);
+      // setText(e.target.value);
+      // setEditing(false);
       setNotes(
         update(notes, {
           [note.id]: {
@@ -94,10 +94,10 @@ export default function EditableNote({ note }) {
   );
 
   useEffect(() => {
-    if (isEditing) {
+    if (note.isEdit) {
       inputRef.focus();
     }
-  }, [isEditing]);
+  }, [note.isEdit]);
 
   const btnAndPin = (
     <>
@@ -135,5 +135,5 @@ export default function EditableNote({ note }) {
     </div>
   );
 
-  return <>{isEditing ? noteEditor : savedNote}</>;
+  return <>{note.isEdit ? noteEditor : savedNote}</>;
 }
