@@ -33,6 +33,9 @@ export default function DraggablePin({ note }) {
                 ...addedLink,
               },
             },
+            ["dateUpdated"]: {
+              $set: new Date().toString(),
+            },
           })
         );
       }
@@ -43,7 +46,7 @@ export default function DraggablePin({ note }) {
   const [, drag, preview] = useDrag({
     item: { type: ItemTypes.PIN, note },
   });
-  
+
   const [{ droppedItem }, drop] = useDrop({
     accept: ItemTypes.PIN,
     drop: () => connectNotes(note, droppedItem.note),

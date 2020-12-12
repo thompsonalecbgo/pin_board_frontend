@@ -34,6 +34,9 @@ export default function EditableNote({ note }) {
           [note.id]: {
             $merge: { isEdit: true },
           },
+          ["dateUpdated"]: {
+            $set: new Date().toString(),
+          },
         })
       );
     },
@@ -51,6 +54,9 @@ export default function EditableNote({ note }) {
         update(notes, {
           [note.id]: {
             $merge: { text: e.target.value, isEdit: false },
+          },
+          ["dateUpdated"]: {
+            $set: new Date().toString(),
           },
         })
       );
@@ -75,6 +81,9 @@ export default function EditableNote({ note }) {
       setNotes(
         update(notes, {
           $unset: [note.id],
+          ["dateUpdated"]: {
+            $set: new Date().toString(),
+          },
         })
       );
       deleteNote({ id: note.id });
@@ -123,6 +132,6 @@ export default function EditableNote({ note }) {
       {btnAndPin}
     </div>
   );
-  
+
   return <>{isEditing ? noteEditor : savedNote}</>;
 }

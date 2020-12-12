@@ -59,6 +59,9 @@ export default function LinkTo({
         setLinks(
           update(links, {
             $unset: [linksFound[0].id],
+            ["dateUpdated"]: {
+              $set: new Date().toString(),
+            },
           })
         );
         deleteLink({ id: linksFound[0].id });

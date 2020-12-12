@@ -45,6 +45,9 @@ export default function CrimeBoard() {
           [movedNote.id]: {
             $merge: { left, top },
           },
+          ["dateUpdated"]: {
+            $set: new Date().toString(),
+          },
         })
       );
       editNote({
@@ -70,6 +73,9 @@ export default function CrimeBoard() {
               toEdit: true,
             },
           },
+          ["dateUpdated"]: {
+            $set: new Date().toString(),
+          },
         })
       );
     },
@@ -90,11 +96,17 @@ export default function CrimeBoard() {
   return (
     <div id="crime-board" ref={drop} onDoubleClick={handleDoubleClick}>
       {Object.keys(notes).map((key, index) => {
+        if (key == "dateUpdated") {
+          return null;
+        }
         return renderNote(notes[key], key);
       })}
       {Object.keys(links).map((key, index) => {
-        const note1 = notes[links[key].note1]
-        const note2 = notes[links[key].note2]
+        if (key == "dateUpdated") {
+          return null;
+        }
+        const note1 = notes[links[key].note1];
+        const note2 = notes[links[key].note2];
         if (!note1 || !note2) {
           return null;
         } else {
