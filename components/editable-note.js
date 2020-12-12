@@ -22,14 +22,11 @@ export function Note({ text }) {
 export default function EditableNote({ note }) {
   let inputRef;
   const [notes, setNotes] = useNotes();
-  // const [text, setText] = useState(note.text);
-  // const [isEditing, setEditing] = useState(note.isEdit);
 
   const handleDoubleClick = useCallback(
     (e) => {
       console.log("Note to edit");
       e.stopPropagation();
-      // setEditing(true);
       setNotes(
         update(notes, {
           [note.id]: {
@@ -46,7 +43,7 @@ export default function EditableNote({ note }) {
 
   const handleChange = useCallback(
     (e) => {
-      // setText(e.target.value);
+      console.log("Note editing");
       setNotes(
         update(notes, {
           [note.id]: {
@@ -65,8 +62,6 @@ export default function EditableNote({ note }) {
     (e) => {
       console.log("Note edited");
       e.stopPropagation();
-      // setText(e.target.value);
-      // setEditing(false);
       setNotes(
         update(notes, {
           [note.id]: {
@@ -87,12 +82,6 @@ export default function EditableNote({ note }) {
     [notes, note]
   );
 
-  const handleFocus = useCallback((e) => {
-    var temp_value = e.target.value;
-    e.target.value = "";
-    e.target.value = temp_value;
-  });
-
   const handleBtnClick = useCallback(
     (e) => {
       console.log("Note deleted");
@@ -108,6 +97,12 @@ export default function EditableNote({ note }) {
     },
     [notes, note]
   );
+
+  const handleFocus = useCallback((e) => {
+    var temp_value = e.target.value;
+    e.target.value = "";
+    e.target.value = temp_value;
+  });
 
   useEffect(() => {
     if (note.isEdit) {
