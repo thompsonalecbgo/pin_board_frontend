@@ -39,14 +39,14 @@ export default function Home(props) {
     } else {
       const localNotes = JSON.parse(savedNotes)
       const localNotesDateUpdated = Date.parse(localNotes.dateUpdated)
-      console.log('')
-      console.log(`cachedNotes ${cachedNotesDateUpdated}`)
-      console.log(`localNotes ${localNotesDateUpdated}`)
+      // console.log('')
+      // console.log(`cachedNotes ${cachedNotesDateUpdated}`)
+      // console.log(`localNotes ${localNotesDateUpdated}`)
       if (localNotesDateUpdated > cachedNotesDateUpdated) {
-        console.log("local storage used")
+        // console.log("local storage used")
         setNotes(localNotes)
       } else {
-        console.log("local storage not used")
+        // console.log("local storage not used")
         localStorage.setItem("_notes", JSON.stringify(notes));
       }
     }

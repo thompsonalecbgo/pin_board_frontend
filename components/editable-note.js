@@ -34,9 +34,9 @@ export default function EditableNote({ note }) {
           [note.id]: {
             $merge: { isEdit: true },
           },
-          ["dateUpdated"]: {
-            $set: new Date().toString(),
-          },
+          // ["dateUpdated"]: {
+          //   $set: new Date().toString(),
+          // },
         })
       );
     },
