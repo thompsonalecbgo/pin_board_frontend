@@ -70,7 +70,7 @@ export default function CrimeBoard() {
               ...addedNote,
               top: e.pageY - e.target.offsetTop,
               left: e.pageX,
-              toEdit: true,
+              isEdit: true,
             },
           },
           ["dateUpdated"]: {

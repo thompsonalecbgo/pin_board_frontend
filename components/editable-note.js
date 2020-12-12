@@ -23,7 +23,7 @@ export default function EditableNote({ note }) {
   let inputRef;
   const [notes, setNotes] = useNotes();
   const [text, setText] = useState(note.text);
-  const [isEditing, setEditing] = useState(note.toEdit);
+  const [isEditing, setEditing] = useState(note.isEdit);
 
   const handleDoubleClick = useCallback(
     (e) => {
@@ -49,9 +49,8 @@ export default function EditableNote({ note }) {
 
   const handleBlur = useCallback(
     (e) => {
-      console.log("notes edited")
-      console.log(e.target.value)
       e.stopPropagation();
+      setText(e.target.value);
       setEditing(false);
       setNotes(
         update(notes, {

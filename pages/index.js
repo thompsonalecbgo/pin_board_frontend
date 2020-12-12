@@ -14,7 +14,7 @@ import CrimeBoardDragLayer from "../components/crime-board-drag-layer";
 
 function prepareNotes(notes) {
   const notEditingNotes = notes.map((note) => {
-    return { ...note, toEdit: false };
+    return { ...note, isEdit: false };
   });
   return normalizeArray(notEditingNotes, "id");
 }
@@ -39,14 +39,14 @@ export default function Home(props) {
     } else {
       const localNotes = JSON.parse(savedNotes)
       const localNotesDateUpdated = Date.parse(localNotes.dateUpdated)
-      console.log('')
-      console.log(`cachedNotes ${cachedNotesDateUpdated}`)
-      console.log(` localNotes ${localNotesDateUpdated}`)
+      // console.log('')
+      // console.log(`cachedNotes ${cachedNotesDateUpdated}`)
+      // console.log(` localNotes ${localNotesDateUpdated}`)
       if (localNotesDateUpdated > cachedNotesDateUpdated) {
-        console.log("local storage used")
+        // console.log("local storage used")
         setNotes(localNotes)
       } else {
-        console.log("local storage not used")
+        // console.log("local storage not used")
         localStorage.setItem("_notes", JSON.stringify(notes));
       }
     }
@@ -58,7 +58,7 @@ export default function Home(props) {
       const localLinksDateUpdated = Date.parse(localLinks.dateUpdated)
       // console.log('')
       // console.log(`cachedLinks ${cachedLinksDateUpdated}`)
-      // console.log(`localLinks ${localLinksDateUpdated}`)
+      // console.log(` localLinks ${localLinksDateUpdated}`)
       if (localLinksDateUpdated > cachedLinksDateUpdated) {
         // console.log("local storage used")
         setLinks(localLinks)
